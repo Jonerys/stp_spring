@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>GW list</title>
+</head>
+<body>
+<div th:switch="${gw}">
+    <h2 th:case="null">No gw found!</h2>
+    <div th:case="*">
+        <h2>GW</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>goods name</th>
+                <th>warehouse name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="single_gw : ${gw}">
+                <td th:text="${single_gw.id}"></td>
+                <td th:text="${single_gw.goodsMainByIdGd.name}"></td>
+                <td th:text="${single_gw.warehousesByIdWh.name}"></td>
+                <td><a th:href="@{gw-create}">Edit</a></td>
+                <td><a th:href="@{gw-delete/{id}(id=${single_gw.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/gw-create">Add Good to Warehouse</a></p>
+</div>
+</body>
+</html>
