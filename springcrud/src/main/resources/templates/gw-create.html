@@ -6,12 +6,20 @@
 </head>
 <body>
 <p><h1>Add Good to Warehouse</h1></p>
-
+<form action="/gw-create" method="post">
     <p>
-        Временно не работает. У меня сущность, а в ней ссылки на еще две сущности.
-        Как заставить контроллер принять два айдюка из формы, найти по ним сущность товара и склада,
-        потом вставить это в сущность связывающей таблицы и сохранить - я не знаю. Нигде не нашел внятной инфы.
+        <label for="id_1">Good ID</label>
+        <input type="number" name="id_g" id="id_1">
+    </p>
+    <p>
+        <label for="id_2">Warehouse ID</label>
+        <input type="number" name="id_w" id="id_2">
     </p>
 
+    <p>
+        <input type="submit" value="Add" />
+        <input type="submit" onclick="javascript:history.back(); return false;" value="Cancel">
+    </p>
+</form>
 </body>
 </html>

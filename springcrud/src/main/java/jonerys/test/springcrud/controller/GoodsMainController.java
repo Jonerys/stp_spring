@@ -41,8 +41,8 @@ public class GoodsMainController {
     }
 
     @GetMapping("/goods-update/{id}")
-    public String updateGoodForm(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("good", gms.findById(id));
+    public String updateGoodForm(@PathVariable("id") String id, Model model){
+        model.addAttribute("good", gms.findById(Integer.parseInt(id)));
         return "goods-update";
     }
 
@@ -53,8 +53,8 @@ public class GoodsMainController {
     }
 
     @GetMapping("/goods-delete/{id}")
-    public String deleteGood(@PathVariable("id") Integer id){
-        gms.deleteById(id);
+    public String deleteGood(@PathVariable("id") String id){
+        gms.deleteById(Integer.parseInt(id));
         return "redirect:/goods";
     }
 }

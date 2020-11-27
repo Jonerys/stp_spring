@@ -43,8 +43,8 @@ public class WarehousesController {
     }
 
     @GetMapping("/warehouses-update/{id}")
-    public String updateWarehouseForm(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("warehouse", ws.findById(id));
+    public String updateWarehouseForm(@PathVariable("id") String id, Model model){
+        model.addAttribute("warehouse", ws.findById(Integer.parseInt(id)));
         return "warehouses-update";
     }
 
@@ -55,8 +55,8 @@ public class WarehousesController {
     }
 
     @GetMapping("/warehouses-delete/{id}")
-    public String deleteWarehouse(@PathVariable("id") Integer id){
-        ws.deleteById(id);
+    public String deleteWarehouse(@PathVariable("id") String id){
+        ws.deleteById(Integer.parseInt(id));
         return "redirect:/warehouses";
     }
 }

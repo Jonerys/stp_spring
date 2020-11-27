@@ -22,7 +22,7 @@
                 <td th:text="${single_gw.id}"></td>
                 <td th:text="${single_gw.goodsMainByIdGd.name}"></td>
                 <td th:text="${single_gw.warehousesByIdWh.name}"></td>
-                <td><a th:href="@{gw-create}">Edit</a></td>
+                <td><a th:href="@{gw-update/{id}(id=${single_gw.id})}">Edit</a></td>
                 <td><a th:href="@{gw-delete/{id}(id=${single_gw.id})}">Delete</a></td>
             </tr>
             </tbody>

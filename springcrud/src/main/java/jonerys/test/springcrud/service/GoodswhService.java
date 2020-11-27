@@ -18,6 +18,10 @@ public class GoodswhService {
         goodswhRepository = gwr;
     }
 
+    public GoodswhEntity findById(String id){
+        return goodswhRepository.getOne(Integer.parseInt(id));
+    }
+
     public List<GoodswhEntity> findAll(){
         return goodswhRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }

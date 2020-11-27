@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Good in Warehouse</title>
+</head>
+<body>
+<p><h1>Update Good in Warehouse</h1></p>
+<form action="/gw-update" method="post">
+    <p>
+        <label for="id">ID</label>
+        <input readonly type="number" th:field="${gw.id}" name="id" id="id">
+    </p>
+    <p>
+        <label for="id_1">Good ID</label>
+        <input type="text" th:value="${gw.goodsMainByIdGd.id}" name="id_g" id="id_1">
+    </p>
+    <p>
+        <label for="id_2">Warehouse ID</label>
+        <input type="text" th:value="${gw.warehousesByIdWh.id}" name="id_w" id="id_2">
+    </p>
+
+    <p>
+        <input type="submit" value="Update" />
+        <input type="submit" onclick="javascript:history.back(); return false;" value="Cancel">
+    </p>
+</form>
+</body>
+</html>
