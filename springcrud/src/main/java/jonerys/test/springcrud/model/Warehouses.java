@@ -2,12 +2,11 @@ package jonerys.test.springcrud.model;
 
 import javax.persistence.*;
 import lombok.Data;
-import lombok.Generated;
 
 @Data
 @Entity
 @Table(name = "warehouses", schema = "goods")
-public class WarehousesEntity {
+public class Warehouses {
     private int id;
     private String name;
 
@@ -37,7 +36,7 @@ public class WarehousesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        WarehousesEntity that = (WarehousesEntity) o;
+        Warehouses that = (Warehouses) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

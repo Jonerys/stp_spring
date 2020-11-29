@@ -1,9 +1,8 @@
 package jonerys.test.springcrud.controller;
 
-import jonerys.test.springcrud.model.GoodsMainEntity;
-import jonerys.test.springcrud.model.GoodswhEntity;
-import jonerys.test.springcrud.model.WarehousesEntity;
-import jonerys.test.springcrud.repository.GoodsMainRepository;
+import jonerys.test.springcrud.model.GoodsMain;
+import jonerys.test.springcrud.model.Goodswh;
+import jonerys.test.springcrud.model.Warehouses;
 import jonerys.test.springcrud.service.GoodsMainService;
 import jonerys.test.springcrud.service.GoodswhService;
 import jonerys.test.springcrud.service.WarehousesService;
@@ -34,22 +33,22 @@ public class GoodswhController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("username", username);
         Integer id = ws.findIdByName(username);
-        List<GoodswhEntity> gwList = gws.findAllInThisWarehouse(id);
+        List<Goodswh> gwList = gws.findAllInThisWarehouse(id);
         model.addAttribute("gw", gwList);
         return "goods-warehouses-list";
     }
 
     @GetMapping("/gw-create")
-    public String createGoodForm(@ModelAttribute("gw") GoodswhEntity gwe, Model model){
+    public String createGoodForm(@ModelAttribute("gw") Goodswh gwe, Model model){
         model.addAttribute("goods", gms.findAll());
         return "gw-create";
     }
 
     @PostMapping("/gw-create")
     public String createGoodswh(@RequestParam("good") String goodName){
-        GoodsMainEntity gme = gms.findByName(goodName);
-        WarehousesEntity we = ws.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
-        GoodswhEntity gwe = new GoodswhEntity();
+        GoodsMain gme = gms.findByName(goodName);
+        Warehouses we = ws.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        Goodswh gwe = new Goodswh();
         gwe.setGoodsMainByIdGd(gme);
         gwe.setWarehousesByIdWh(we);
         gws.save(gwe);
@@ -66,9 +65,9 @@ public class GoodswhController {
 
     @PostMapping("/gw-update")
     public String updateGoodswh(@RequestParam("id") String id, @RequestParam("good") String goodName){
-        GoodsMainEntity gme = gms.findByName(goodName);
-        WarehousesEntity we = ws.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
-        GoodswhEntity gwe = gws.findById(id);
+        GoodsMain gme = gms.findByName(goodName);
+        Warehouses we = ws.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        Goodswh gwe = gws.findById(id);
         gwe.setGoodsMainByIdGd(gme);
         gwe.setWarehousesByIdWh(we);
         gws.save(gwe);

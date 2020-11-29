@@ -3,7 +3,7 @@ package jonerys.test.springcrud.controller;
 
 import jonerys.test.springcrud.model.Role;
 import jonerys.test.springcrud.model.User;
-import jonerys.test.springcrud.model.WarehousesEntity;
+import jonerys.test.springcrud.model.Warehouses;
 import jonerys.test.springcrud.service.UserService;
 import jonerys.test.springcrud.service.WarehousesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +33,18 @@ public class WarehousesController {
 
     @GetMapping("/warehouses")
     public String findAll(Model model){
-        List<WarehousesEntity> warehousesList = ws.findAll();
+        List<Warehouses> warehousesList = ws.findAll();
         model.addAttribute("warehouses", warehousesList);
         return "warehouses-list";
     }
 
     @GetMapping("/warehouses-create")
-    public String createWarehouseForm(@ModelAttribute("warehouse") WarehousesEntity we){
+    public String createWarehouseForm(@ModelAttribute("warehouse") Warehouses we){
         return "warehouses-create";
     }
 
     @PostMapping("/warehouses-create")
-    public String createWarehouse(@ModelAttribute("warehouse") WarehousesEntity we){
+    public String createWarehouse(@ModelAttribute("warehouse") Warehouses we){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         User user = new User();
         user.setLogin(we.getName());
@@ -62,7 +62,7 @@ public class WarehousesController {
     }
 
     @PostMapping("/warehouses-update")
-    public String updateWarehouse(@ModelAttribute("warehouse") WarehousesEntity we){
+    public String updateWarehouse(@ModelAttribute("warehouse") Warehouses we){
         User user = us.findByLogin(ws.findById(we.getId()).getName());
         user.setLogin(we.getName());
         us.save(user);

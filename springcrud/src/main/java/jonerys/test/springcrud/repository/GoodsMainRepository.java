@@ -1,7 +1,6 @@
 package jonerys.test.springcrud.repository;
 
-import jonerys.test.springcrud.model.GoodsMainEntity;
-import jonerys.test.springcrud.model.WarehousesEntity;
+import jonerys.test.springcrud.model.GoodsMain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GoodsMainRepository extends JpaRepository<GoodsMainEntity, Integer> {
+public interface GoodsMainRepository extends JpaRepository<GoodsMain, Integer> {
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE GoodsMainEntity SET name = :name WHERE id = :id")
+    @Query("UPDATE GoodsMain SET name = :name WHERE id = :id")
     void update(@Param("id") Integer id, @Param("name") String name);
 
-    @Query("FROM GoodsMainEntity WHERE name = :name")
-    GoodsMainEntity findByName(@Param("name") String name);
+    @Query("FROM GoodsMain WHERE name = :name")
+    GoodsMain findByName(@Param("name") String name);
 }
