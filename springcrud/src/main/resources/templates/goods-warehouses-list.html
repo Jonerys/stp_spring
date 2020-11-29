@@ -2,34 +2,34 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>GW list</title>
+    <title>Список товаров на складе</title>
 </head>
 <body>
 <div th:switch="${gw}">
-    <h2 th:case="null">No gw found!</h2>
+    <h2 th:case="null">Не найдено товаров на этом складе!</h2>
     <div th:case="*">
-        <h2>GW</h2>
-        <h2 th:text="${username}"></h2>
+        <h2>Товары на складе "<span th:text="${username}"></span>"</h2>
         <table>
             <thead>
             <tr>
-                <th>id</th>
-                <th>goods name</th>
-                <th>warehouse name</th>
+                <th>ИД</th>
+                <th>Название товара</th>
+                <!-- <th>Название склада</th> -->
             </tr>
             </thead>
             <tbody>
             <tr th:each="single_gw : ${gw}">
                 <td th:text="${single_gw.id}"></td>
                 <td th:text="${single_gw.goodsMainByIdGd.name}"></td>
-                <td th:text="${single_gw.warehousesByIdWh.name}"></td>
-                <td><a th:href="@{gw-update/{id}(id=${single_gw.id})}">Edit</a></td>
-                <td><a th:href="@{gw-delete/{id}(id=${single_gw.id})}">Delete</a></td>
+                <!-- <td th:text="${single_gw.warehousesByIdWh.name}"></td> -->
+                <td><a th:href="@{gw-update/{id}(id=${single_gw.id})}">Изменить</a></td>
+                <td><a th:href="@{gw-delete/{id}(id=${single_gw.id})}">Удалить</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/gw-create">Add Good to Warehouse</a></p>
+    <p><a href="/gw-create">Добавить товар на склад</a></p><br>
+    <p><a href="/welcome" style="font-size: 16pt">Вернуться на главную страницу</a></p>
 </div>
 </body>
 </html>

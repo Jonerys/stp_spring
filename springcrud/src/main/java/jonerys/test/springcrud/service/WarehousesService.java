@@ -18,6 +18,10 @@ public class WarehousesService {
         warehousesRepository = wr;
     }
 
+    public Integer findIdByName(String name) { return warehousesRepository.findIdByName(name); }
+
+    public WarehousesEntity findByName(String name) { return warehousesRepository.findByName(name); }
+
     public WarehousesEntity findById(Integer id){
         return warehousesRepository.getOne(id);
     }

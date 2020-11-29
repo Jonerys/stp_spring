@@ -21,6 +21,10 @@ public class GoodsMainService {
         return goodsMainRepository.getOne(id);
     }
 
+    public GoodsMainEntity findByName(String name){
+        return goodsMainRepository.findByName(name);
+    }
+
     public List<GoodsMainEntity> findAll(){
         return goodsMainRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }

@@ -72,6 +72,7 @@ public class WarehousesController {
 
     @GetMapping("/warehouses-delete/{id}")
     public String deleteWarehouse(@PathVariable("id") String id){
+        us.deleteByLogin(ws.findById(Integer.parseInt(id)).getName());
         ws.deleteById(Integer.parseInt(id));
         return "redirect:/warehouses";
     }

@@ -18,6 +18,10 @@ public class GoodswhService {
         goodswhRepository = gwr;
     }
 
+    public List<GoodswhEntity> findAllInThisWarehouse(Integer id){
+        return goodswhRepository.findAllInThisWarehouse(id);
+    }
+
     public GoodswhEntity findById(String id){
         return goodswhRepository.getOne(Integer.parseInt(id));
     }

@@ -14,6 +14,7 @@ public class UserService {
 
     public User findByLogin(String login) { return userRepository.findByLogin(login); }
 
+    public void deleteByLogin(String login) { userRepository.deleteByLogin(login); }
 
     public User save(User user) { return userRepository.save(user); }
 }

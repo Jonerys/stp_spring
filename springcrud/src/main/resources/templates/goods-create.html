@@ -2,19 +2,19 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Create good</title>
+    <title>Добавить товар</title>
 </head>
 <body>
-<p><h1>New Good</h1></p>
+<p><h1>Добавить товар</h1></p>
 <form action="#" th:action="@{/goods-create}" th:object="${good}" method="post">
     <p>
-        <label for="name">Name</label>
-        <input type="text" th:field="*{name}" id="name" placeholder="Name">
+        <label for="name">Наименование</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Наименование">
     </p>
 
     <p>
-        <input type="submit" value="Create" />
-        <input type="submit" onclick="javascript:history.back(); return false;" value="Cancel">
+        <input type="submit" value="Добавить" />
+        <input type="submit" onclick="javascript:history.back(); return false;" value="Отмена">
     </p>
 </form>
 </body>

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -16,6 +17,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT id FROM User WHERE login = :login")
     Integer findIDByLogin(@Param("login") String login);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM User WHERE login = :login")
+    void deleteByLogin(@Param("login") String login);
 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE User SET login = :login WHERE id = :id")

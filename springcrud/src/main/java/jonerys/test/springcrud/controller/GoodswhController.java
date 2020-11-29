@@ -31,21 +31,24 @@ public class GoodswhController {
 
     @GetMapping("/goods-warehouses")
     public String findAll(Model model){
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        List<GoodswhEntity> gwList = gws.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("username", username);
+        Integer id = ws.findIdByName(username);
+        List<GoodswhEntity> gwList = gws.findAllInThisWarehouse(id);
         model.addAttribute("gw", gwList);
         return "goods-warehouses-list";
     }
 
     @GetMapping("/gw-create")
-    public String createGoodForm(@ModelAttribute("gw") GoodswhEntity gwe){
+    public String createGoodForm(@ModelAttribute("gw") GoodswhEntity gwe, Model model){
+        model.addAttribute("goods", gms.findAll());
         return "gw-create";
     }
 
     @PostMapping("/gw-create")
-    public String createGoodswh(@RequestParam("id_g") String gId, @RequestParam("id_w") String wId){
-        GoodsMainEntity gme = gms.findById(Integer.parseInt(gId));
-        WarehousesEntity we = ws.findById(Integer.parseInt(wId));
+    public String createGoodswh(@RequestParam("good") String goodName){
+        GoodsMainEntity gme = gms.findByName(goodName);
+        WarehousesEntity we = ws.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
         GoodswhEntity gwe = new GoodswhEntity();
         gwe.setGoodsMainByIdGd(gme);
         gwe.setWarehousesByIdWh(we);
@@ -55,14 +58,16 @@ public class GoodswhController {
 
     @GetMapping("/gw-update/{id}")
     public String updateGoodswhForm(@PathVariable("id") String id, Model model){
+        model.addAttribute("goods", gms.findAll());
         model.addAttribute("gw", gws.findById(id));
+        model.addAttribute("id", id);
         return "gw-update";
     }
 
     @PostMapping("/gw-update")
-    public String updateGoodswh(@RequestParam("id") String id, @RequestParam("id_g") String gId, @RequestParam("id_w") String wId){
-        GoodsMainEntity gme = gms.findById(Integer.parseInt(gId));
-        WarehousesEntity we = ws.findById(Integer.parseInt(wId));
+    public String updateGoodswh(@RequestParam("id") String id, @RequestParam("good") String goodName){
+        GoodsMainEntity gme = gms.findByName(goodName);
+        WarehousesEntity we = ws.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
         GoodswhEntity gwe = gws.findById(id);
         gwe.setGoodsMainByIdGd(gme);
         gwe.setWarehousesByIdWh(we);

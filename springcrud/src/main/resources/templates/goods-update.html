@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Update Good</title>
+    <title>Обновить информацию о товаре</title>
 </head>
 <body>
-<p><h1>Update Good</h1></p>
+<p><h1>Обновить информацию о товаре</h1></p>
 <form action="#" th:action="@{/goods-update}" th:object="${good}" method="post">
     <p>
         <label for="id">ID</label>
@@ -17,8 +17,8 @@
     </p>
 
     <p>
-        <input type="submit" value="Update" />
-        <input type="submit" onclick="javascript:history.back(); return false;" value="Cancel">
+        <input type="submit" value="Обновить" />
+        <input type="submit" onclick="javascript:history.back(); return false;" value="Отмена">
     </p>
 </form>
 </body>

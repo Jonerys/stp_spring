@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/warehouses-update/**").hasAuthority(Permission.ADMIN_PERMISSIONS.getPermission())
                 .antMatchers("/goods-warehouses/**").hasAuthority(Permission.USER_PERMISSIONS.getPermission())
                 .antMatchers("/goods-warehouses/").hasAuthority(Permission.USER_PERMISSIONS.getPermission())
-                .anyRequest().authenticated().and().formLogin();
+                .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/welcome");
     }
 
     /*@Bean
