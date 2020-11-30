@@ -1,6 +1,6 @@
 package jonerys.test.springcrud.controller;
 
-import jonerys.test.springcrud.model.GoodsMainEntity;
+import jonerys.test.springcrud.model.GoodsMain;
 import jonerys.test.springcrud.service.GoodsMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,18 +24,18 @@ public class GoodsMainController {
 
     @GetMapping("/goods")
     public String findAll(Model model){
-        List<GoodsMainEntity> goodsList = gms.findAll();
+        List<GoodsMain> goodsList = gms.findAll();
         model.addAttribute("goods", goodsList);
         return "goods-list";
     }
 
     @GetMapping("/goods-create")
-    public String createGoodForm(@ModelAttribute("good") GoodsMainEntity gme){
+    public String createGoodForm(@ModelAttribute("good") GoodsMain gme){
         return "goods-create";
     }
 
     @PostMapping("/goods-create")
-    public String createGood(@ModelAttribute("good") GoodsMainEntity gme){
+    public String createGood(@ModelAttribute("good") GoodsMain gme){
         gms.save(gme);
         return "redirect:/goods";
     }
@@ -47,7 +47,7 @@ public class GoodsMainController {
     }
 
     @PostMapping("/goods-update")
-    public String updateGood(@ModelAttribute("good") GoodsMainEntity gme){
+    public String updateGood(@ModelAttribute("good") GoodsMain gme){
         gms.save(gme);
         return "redirect:/goods";
     }

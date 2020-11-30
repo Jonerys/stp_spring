@@ -2,23 +2,23 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add Good to Warehouse</title>
+    <title>Добавить товар на склад</title>
 </head>
 <body>
-<p><h1>Add Good to Warehouse</h1></p>
+<p><h1>Добавить товар на склад</h1></p>
 <form action="/gw-create" method="post">
     <p>
-        <label for="id_1">Good ID</label>
-        <input type="number" name="id_g" id="id_1">
-    </p>
-    <p>
-        <label for="id_2">Warehouse ID</label>
-        <input type="number" name="id_w" id="id_2">
+        <label for="good_id">Товар</label>
+        <select name="good" id="good_id">
+            <option th:each="good_item : ${goods}"
+                        th:value="${good_item.name}"
+                        th:text="${good_item.name}"></option>
+        </select>
     </p>
 
     <p>
-        <input type="submit" value="Add" />
-        <input type="submit" onclick="javascript:history.back(); return false;" value="Cancel">
+        <input type="submit" value="Добавить" />
+        <input type="submit" onclick="javascript:history.back(); return false;" value="Отмена">
     </p>
 </form>
 </body>

@@ -1,8 +1,8 @@
 package jonerys.test.springcrud.service;
 
-import jonerys.test.springcrud.model.GoodsMainEntity;
-import jonerys.test.springcrud.model.GoodswhEntity;
-import jonerys.test.springcrud.model.WarehousesEntity;
+import jonerys.test.springcrud.model.GoodsMain;
+import jonerys.test.springcrud.model.Goodswh;
+import jonerys.test.springcrud.model.Warehouses;
 import jonerys.test.springcrud.repository.GoodswhRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -18,19 +18,23 @@ public class GoodswhService {
         goodswhRepository = gwr;
     }
 
-    public GoodswhEntity findById(String id){
+    public List<Goodswh> findAllInThisWarehouse(Integer id){
+        return goodswhRepository.findAllInThisWarehouse(id);
+    }
+
+    public Goodswh findById(String id){
         return goodswhRepository.getOne(Integer.parseInt(id));
     }
 
-    public List<GoodswhEntity> findAll(){
+    public List<Goodswh> findAll(){
         return goodswhRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
-    public GoodswhEntity save(GoodswhEntity gwe){
+    public Goodswh save(Goodswh gwe){
         return goodswhRepository.save(gwe);
     }
 
-    public void update(Integer id, GoodsMainEntity gme, WarehousesEntity we){
+    public void update(Integer id, GoodsMain gme, Warehouses we){
         goodswhRepository.update(id, gme, we);
     }
 

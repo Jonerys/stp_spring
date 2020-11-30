@@ -1,6 +1,6 @@
 package jonerys.test.springcrud.service;
 
-import jonerys.test.springcrud.model.GoodsMainEntity;
+import jonerys.test.springcrud.model.GoodsMain;
 import jonerys.test.springcrud.repository.GoodsMainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,15 +17,19 @@ public class GoodsMainService {
         goodsMainRepository = gmr;
     }
 
-    public GoodsMainEntity findById(Integer id){
+    public GoodsMain findById(Integer id){
         return goodsMainRepository.getOne(id);
     }
 
-    public List<GoodsMainEntity> findAll(){
+    public GoodsMain findByName(String name){
+        return goodsMainRepository.findByName(name);
+    }
+
+    public List<GoodsMain> findAll(){
         return goodsMainRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
-    public GoodsMainEntity save(GoodsMainEntity gme){
+    public GoodsMain save(GoodsMain gme){
         return goodsMainRepository.save(gme);
     }
 

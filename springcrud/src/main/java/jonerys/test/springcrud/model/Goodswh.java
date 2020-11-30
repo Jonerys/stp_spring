@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "goodswh", schema = "goods")
-public class GoodswhEntity {
+public class Goodswh {
     private int id;
-    private WarehousesEntity warehousesByIdWh;
-    private GoodsMainEntity goodsMainByIdGd;
+    private Warehouses warehousesByIdWh;
+    private GoodsMain goodsMainByIdGd;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -26,7 +26,7 @@ public class GoodswhEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GoodswhEntity that = (GoodswhEntity) o;
+        Goodswh that = (Goodswh) o;
 
         if (id != that.id) return false;
 
@@ -40,21 +40,21 @@ public class GoodswhEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_wh", referencedColumnName = "id", nullable = false)
-    public WarehousesEntity getWarehousesByIdWh() {
+    public Warehouses getWarehousesByIdWh() {
         return warehousesByIdWh;
     }
 
-    public void setWarehousesByIdWh(WarehousesEntity warehousesByIdWh) {
+    public void setWarehousesByIdWh(Warehouses warehousesByIdWh) {
         this.warehousesByIdWh = warehousesByIdWh;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_gd", referencedColumnName = "id", nullable = false)
-    public GoodsMainEntity getGoodsMainByIdGd() {
+    public GoodsMain getGoodsMainByIdGd() {
         return goodsMainByIdGd;
     }
 
-    public void setGoodsMainByIdGd(GoodsMainEntity goodsMainByIdGd) {
+    public void setGoodsMainByIdGd(GoodsMain goodsMainByIdGd) {
         this.goodsMainByIdGd = goodsMainByIdGd;
     }
 }

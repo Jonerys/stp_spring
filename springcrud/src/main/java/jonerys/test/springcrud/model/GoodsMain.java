@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "goods_main", schema = "goods")
-public class GoodsMainEntity {
+public class GoodsMain {
     private int id;
     private String name;
 
@@ -35,7 +35,7 @@ public class GoodsMainEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GoodsMainEntity that = (GoodsMainEntity) o;
+        GoodsMain that = (GoodsMain) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

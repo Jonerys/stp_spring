@@ -1,10 +1,14 @@
 package jonerys.test.springcrud.controller;
 
-import jonerys.test.springcrud.model.GoodsMainEntity;
-import jonerys.test.springcrud.model.WarehousesEntity;
-import jonerys.test.springcrud.service.GoodsMainService;
+
+import jonerys.test.springcrud.model.Role;
+import jonerys.test.springcrud.model.User;
+import jonerys.test.springcrud.model.Warehouses;
+import jonerys.test.springcrud.service.UserService;
 import jonerys.test.springcrud.service.WarehousesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,26 +22,35 @@ import java.util.List;
 public class WarehousesController {
 
     private WarehousesService ws;
+    private UserService us;
 
     @Autowired
-    public WarehousesController(WarehousesService ws){
+    public WarehousesController(WarehousesService ws, UserService us){
+
         this.ws = ws;
+        this.us = us;
     }
 
     @GetMapping("/warehouses")
     public String findAll(Model model){
-        List<WarehousesEntity> warehousesList = ws.findAll();
+        List<Warehouses> warehousesList = ws.findAll();
         model.addAttribute("warehouses", warehousesList);
         return "warehouses-list";
     }
 
     @GetMapping("/warehouses-create")
-    public String createWarehouseForm(@ModelAttribute("warehouse") WarehousesEntity we){
+    public String createWarehouseForm(@ModelAttribute("warehouse") Warehouses we){
         return "warehouses-create";
     }
 
     @PostMapping("/warehouses-create")
-    public String createWarehouse(@ModelAttribute("warehouse") WarehousesEntity we){
+    public String createWarehouse(@ModelAttribute("warehouse") Warehouses we){
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+        User user = new User();
+        user.setLogin(we.getName());
+        user.setPassword(passwordEncoder.encode("123"));
+        user.setRole(Role.USER);
+        us.save(user);
         ws.save(we);
         return "redirect:/warehouses";
     }
@@ -49,13 +62,17 @@ public class WarehousesController {
     }
 
     @PostMapping("/warehouses-update")
-    public String updateWarehouse(@ModelAttribute("warehouse") WarehousesEntity we){
+    public String updateWarehouse(@ModelAttribute("warehouse") Warehouses we){
+        User user = us.findByLogin(ws.findById(we.getId()).getName());
+        user.setLogin(we.getName());
+        us.save(user);
         ws.save(we);
         return "redirect:/warehouses";
     }
 
     @GetMapping("/warehouses-delete/{id}")
     public String deleteWarehouse(@PathVariable("id") String id){
+        us.deleteByLogin(ws.findById(Integer.parseInt(id)).getName());
         ws.deleteById(Integer.parseInt(id));
         return "redirect:/warehouses";
     }
